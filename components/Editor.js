@@ -9,6 +9,8 @@ const _Editor = () => {
   return (
     <Editor
       wrapperClassName='editor__container'
+      toolbarClassName='editor__container--toolbar'
+      editorClassName='editor__container--text-field'
       // editorState={editorState}
       // onEditorStateChange={this.onEditorStateChange}
     />

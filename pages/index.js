@@ -7,7 +7,7 @@ const Home = () => {
         React WYSIWYG Editor
       </h1>
 
-      <div style={{ width: 800, margin: 'auto' }}>
+      <div style={{ width: 800, height: 600, margin: 'auto' }}>
         <Editor />
       </div>
     </>

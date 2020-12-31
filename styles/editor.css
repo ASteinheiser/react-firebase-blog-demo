@@ -1,4 +1,15 @@
 .editor__container {
+  height: inherit;
+
   border-radius: 4px;
   border: 1px solid #ccc;
+}
+
+.editor__container--toolbar {
+  height: 70px;
+}
+
+.editor__container--text-field {
+  height: calc(100% - 75px) !important;
+  overflow: scroll !important;
 }
