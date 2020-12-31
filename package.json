@@ -8,8 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "draft-js": "^0.11.7",
     "next": "10.0.4",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-draft-wysiwyg": "^1.14.5"
   }
 }
