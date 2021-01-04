@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import db from '../firebase'
-import { BlogPosts, Editor } from '../components'
+import { BlogPosts, BlogPostEditor } from '../components'
 
 const Home = () => {
   const [postName, setPostName] = useState('')
@@ -23,6 +23,8 @@ const Home = () => {
       })
       .catch(error => console.error('Error getting posts: ', error))
   }
+
+  const handleCreatePost = () => {}
 
   const handleUpsertPost = () => {
     if (editPostData) {
@@ -47,41 +49,17 @@ const Home = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: 'center' }}>
-        React WYSIWYG Editor
-      </h1>
+      <BlogPostEditor />
 
-      <div style={{ textAlign: 'center', marginBottom: 16, paddingTop: 16, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-        <div style={{ fontSize: 18, fontWeight: 'bold', marginRight: 16 }}>
-          Post Title:
-        </div>
+      <h1 className='text-center'>(React + Firebase) Blog Demo</h1>
 
-        <input
-          style={{ fontSize: 18 }}
-          type='text'
-          id='postName'
-          name='postName'
-          value={postName}
-          onChange={({ target }) => setPostName(target.value)}
-        />
-      </div>
-
-      <div style={{ width: 800, height: 600, margin: 'auto' }}>
-        <Editor
-          onChange={setEditorData}
-          initialState={editPostData && editPostData.data}
-        />
-      </div>
-
-      <div style={{ textAlign: 'center', marginTop: 24, marginBottom: 48 }}>
-        <button style={{ cursor: 'pointer' }} onClick={handleUpsertPost}>
-          Create/Update Post
+      <div className='new-post-button__container'>
+        <button className='new-post-button' onClick={handleCreatePost}>
+          Create New Post
         </button>
       </div>
 
-      <h1 style={{ textAlign: 'center' }}>
-        Blog Posts
-      </h1>
+      <h1 className='text-center'>Blog Posts</h1>
 
       <BlogPosts
         data={posts}

@@ -14,3 +14,18 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.text-center {
+  text-align: center;
+}
+
+.new-post-button {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.new-post-button__container {
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 48px;
+}

@@ -1,0 +1,20 @@
+.blog-posts__container {
+  width: 600px;
+  margin: 8px auto;
+
+  font-size: 20px;
+  text-align: center;
+
+  padding: 16px 0;
+  border: 1px solid grey;
+}
+
+.blog-post__edit-button {
+  cursor: pointer;
+
+  margin-left: 16px;
+}
+
+.blog-post__preview {
+  margin-top: 32px;
+}

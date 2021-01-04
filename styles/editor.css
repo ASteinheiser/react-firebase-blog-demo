@@ -7,9 +7,12 @@
 
 .editor__container--toolbar {
   height: 70px;
+  margin-bottom: 0 !important;
 }
 
 .editor__container--text-field {
-  height: calc(100% - 75px) !important;
+  height: calc(100% - 70px) !important;
   overflow: scroll !important;
+
+  background-color: white;
 }

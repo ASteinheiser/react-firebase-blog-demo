@@ -4,14 +4,11 @@ const BlogPosts = ({ data, handleEditPost }) => {
   if (!data) return null
 
   return data.map(blogPost => (
-    <div
-      key={blogPost.id}
-      style={{ width: 600, margin: '8px auto', textAlign: 'center', fontSize: 20, padding: '16px 0', border: '1px solid grey' }}
-    >
+    <div key={blogPost.id} className='blog-posts__container'>
       {blogPost.title}
 
       <button
-        style={{ marginLeft: 16, cursor: 'pointer' }}
+        className='blog-post__edit-button'
         onClick={() => handleEditPost(blogPost)}
       >
         EDIT
@@ -19,9 +16,10 @@ const BlogPosts = ({ data, handleEditPost }) => {
 
       <br />
 
-      <div style={{ marginTop: 16 }}>
-        <div dangerouslySetInnerHTML={{ __html: convertToHtml(blogPost.data) }} />
-      </div>
+      <div
+        className='blog-post__preview'
+        dangerouslySetInnerHTML={{ __html: convertToHtml(blogPost.data) }}
+      />
     </div>
   ))
 }
