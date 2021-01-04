@@ -5,16 +5,23 @@ const BlogPosts = ({ data, handleEditPost }) => {
 
   return data.map(blogPost => (
     <div key={blogPost.id} className='blog-posts__container'>
-      {blogPost.title}
+      <div className='blog-posts__title'>
+        {blogPost.title}
 
-      <button
-        className='blog-post__edit-button'
-        onClick={() => handleEditPost(blogPost)}
-      >
-        EDIT
-      </button>
+        <button
+          className='blog-post__button'
+          onClick={() => handleEditPost(blogPost)}
+        >
+          EDIT
+        </button>
 
-      <br />
+        <button
+          className='blog-post__button'
+          onClick={() => handleEditPost(blogPost)}
+        >
+          DELETE
+        </button>
+      </div>
 
       <div
         className='blog-post__preview'

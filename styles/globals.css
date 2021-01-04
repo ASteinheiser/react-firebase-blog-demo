@@ -26,6 +26,5 @@ a {
 
 .new-post-button__container {
   text-align: center;
-  margin-top: 24px;
-  margin-bottom: 48px;
+  margin: 36px 0;
 }
