@@ -73,16 +73,24 @@ const Home = () => {
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: 24, marginBottom: 24 }}>
-        <button type='button' onClick={handleUpsertPost}>
+      <div style={{ textAlign: 'center', marginTop: 24, marginBottom: 48 }}>
+        <button style={{ cursor: 'pointer' }} onClick={handleUpsertPost}>
           Create/Update Post
         </button>
       </div>
+
+      <h1 style={{ textAlign: 'center' }}>
+        Blog Posts
+      </h1>
 
       <BlogPosts
         data={posts}
         handleEditPost={handleEditPost}
       />
+
+      <br/>
+      <br/>
+      <br/>
     </>
   )
 }
