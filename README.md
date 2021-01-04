@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, create a [Firebase Project](https://console.firebase.google.com/u/0/) with a [Firestore](https://firebase.google.com/docs/firestore).
+First, create a [Firebase Project](https://console.firebase.google.com/u/0/) with a [Firestore](https://firebase.google.com/docs/firestore). You will need to copy your Firebase config into `./firebase/config.json`.
 
 Then, run the development server:
 
