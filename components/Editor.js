@@ -2,12 +2,12 @@ import dynamic from 'next/dynamic'
 import { convertToRaw, convertFromRaw } from 'draft-js'
 import convertToHtml from 'draftjs-to-html'
 
-const Editor = dynamic(
+const DraftEditor = dynamic(
   () => import('react-draft-wysiwyg').then(mod => mod.Editor),
   { ssr: false }
 )
 
-const _Editor = ({ onChange, onChangeRaw, onChangeHTML, initialState }) => {
+const Editor = ({ onChange, onChangeRaw, onChangeHTML, initialState }) => {
   if (!initialState) {
     initialState = { blocks: [], entityMap: {} }
   } else {
@@ -21,7 +21,7 @@ const _Editor = ({ onChange, onChangeRaw, onChangeHTML, initialState }) => {
   }
 
   return (
-    <Editor
+    <DraftEditor
       initialContentState={initialState}
       onContentStateChange={handleChange}
       wrapperClassName='editor__container'
@@ -31,4 +31,4 @@ const _Editor = ({ onChange, onChangeRaw, onChangeHTML, initialState }) => {
   )
 }
 
-export default _Editor
+export default Editor
