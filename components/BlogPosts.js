@@ -1,6 +1,6 @@
 import convertToHtml from 'draftjs-to-html'
 
-const BlogPosts = ({ data, handleEditPost }) => {
+const BlogPosts = ({ data, handleEditPost, handleDeletePost }) => {
   if (!data) return null
 
   return data.map(blogPost => (
@@ -17,7 +17,7 @@ const BlogPosts = ({ data, handleEditPost }) => {
 
         <button
           className='blog-post__button'
-          onClick={() => handleEditPost(blogPost)}
+          onClick={() => handleDeletePost(blogPost)}
         >
           DELETE
         </button>

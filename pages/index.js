@@ -5,8 +5,6 @@ import { BlogPosts, BlogPostEditor } from '../components'
 
 const Home = () => {
   const [postEditorVisible, setPostEditorVisible] = useState(false)
-  const [postName, setPostName] = useState('')
-  const [editorData, setEditorData] = useState(null)
   const [editPostData, setEditPostData] = useState(null)
   const [posts, setPosts] = useState(null)
 
@@ -25,32 +23,42 @@ const Home = () => {
       .catch(error => console.error('Error getting posts: ', error))
   }
 
-  const handleUpsertPost = () => {
-    if (editPostData) {
+  const handleUpsertPost = blogPost => {
+    if (blogPost.id) {
       // handle updating a post here...
-      console.log(editPostData.id)
-    } else if (postName && editorData) {
-      const data = { title: postName, data: { ...editorData } }
+      console.log(blogPost.id)
+      handleCloseEditor()
+    } else {
+      const data = { title: blogPost.title, data: blogPost.data }
 
       db.collection('posts').add(data)
-        .then(({ id }) => {
+        .then(() => {
           getPosts()
-          setEditPostData({ id, title: postName, data: editorData })
+          handleCloseEditor()
         })
         .catch(error => console.error('Error adding post: ', error))
     }
   }
 
+  const handleDeletePost = data => {}
+
   const handleEditPost = data => {
-    setPostName(data.title)
     setEditPostData(data)
+    setPostEditorVisible(true)
+  }
+
+  const handleCloseEditor = () => {
+    setEditPostData(null)
+    setPostEditorVisible(false)
   }
 
   return (
     <>
       <BlogPostEditor
         visible={postEditorVisible}
-        onClose={() => setPostEditorVisible(false)}
+        editPostData={editPostData}
+        onComplete={handleUpsertPost}
+        onClose={handleCloseEditor}
       />
 
       <h1 className='text-center'>(React + Firebase) Blog Demo</h1>
@@ -69,6 +77,7 @@ const Home = () => {
       <BlogPosts
         data={posts}
         handleEditPost={handleEditPost}
+        handleDeletePost={handleDeletePost}
       />
 
       <br/>

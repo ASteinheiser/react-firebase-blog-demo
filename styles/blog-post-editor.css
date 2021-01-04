@@ -54,3 +54,9 @@
 
   margin: auto;
 }
+
+.blog-post-editor__button {
+  font-size: 20px;
+
+  margin-top: 36px;
+}
