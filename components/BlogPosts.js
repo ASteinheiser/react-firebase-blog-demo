@@ -1,6 +1,4 @@
-const BlogPosts = ({ data }) => {
-  console.log({ data })
-
+const BlogPosts = ({ data, handleEditPost }) => {
   return null
 }
 

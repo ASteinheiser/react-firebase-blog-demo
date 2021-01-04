@@ -4,27 +4,45 @@ import db from '../firebase'
 import { BlogPosts, Editor } from '../components'
 
 const Home = () => {
+  const [postName, setPostName] = useState('')
   const [editorData, setEditorData] = useState(null)
-  const [initialEditorData, setInitialEditorData] = useState(null)
+  const [editPostData, setEditPostData] = useState(null)
   const [posts, setPosts] = useState(null)
 
-  useEffect(() => {
+  useEffect(() => getPosts(), [])
+
+  const getPosts = () => {
     db.collection('posts').get()
       .then(querySnapshot => {
         const postsArray = []
-        querySnapshot.forEach(doc => postsArray.push(doc))
+        querySnapshot.forEach(doc => {
+          postsArray.push({ id: doc.id, ...doc.data() })
+        })
 
         setPosts(postsArray)
       })
       .catch(error => console.error('Error getting posts: ', error))
-  }, [])
+  }
 
-  const handleCreatePost = () => {
-    if (editorData) {
-      db.collection('posts').add(editorData)
-        .then(docRef => console.log('Post created with ID: ', docRef.id))
+  const handleUpsertPost = () => {
+    if (editPostData) {
+      // handle updating a post here...
+      console.log(editPostData.id)
+    } else if (postName && editorData) {
+      const data = { title: postName, data: { ...editorData } }
+
+      db.collection('posts').add(data)
+        .then(({ id }) => {
+          getPosts()
+          setEditPostData({ id, title: postName, data: editorData })
+        })
         .catch(error => console.error('Error adding post: ', error))
     }
+  }
+
+  const handleEditPost = data => {
+    setPostName(data.title)
+    setEditPostData(data)
   }
 
   return (
@@ -33,20 +51,38 @@ const Home = () => {
         React WYSIWYG Editor
       </h1>
 
-      <div style={{ width: 800, height: 600, margin: 'auto' }}>
-        <Editor
-          onChangeRaw={setEditorData}
-          initialState={initialEditorData}
+      <div style={{ textAlign: 'center', marginBottom: 16, paddingTop: 16, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ fontSize: 18, fontWeight: 'bold', marginRight: 16 }}>
+          Post Title:
+        </div>
+
+        <input
+          style={{ fontSize: 18 }}
+          type='text'
+          id='postName'
+          name='postName'
+          value={postName}
+          onChange={({ target }) => setPostName(target.value)}
         />
       </div>
 
-      <div style={{ textAlign: 'center', marginTop: 24 }}>
-        <button type='button' onClick={handleCreatePost}>
-          Create Post
+      <div style={{ width: 800, height: 600, margin: 'auto' }}>
+        <Editor
+          onChange={setEditorData}
+          initialState={editPostData && editPostData.data}
+        />
+      </div>
+
+      <div style={{ textAlign: 'center', marginTop: 24, marginBottom: 24 }}>
+        <button type='button' onClick={handleUpsertPost}>
+          Create/Update Post
         </button>
       </div>
 
-      <BlogPosts data={posts} />
+      <BlogPosts
+        data={posts}
+        handleEditPost={handleEditPost}
+      />
     </>
   )
 }
