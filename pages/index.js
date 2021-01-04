@@ -4,6 +4,7 @@ import db from '../firebase'
 import { BlogPosts, BlogPostEditor } from '../components'
 
 const Home = () => {
+  const [postEditorVisible, setPostEditorVisible] = useState(false)
   const [postName, setPostName] = useState('')
   const [editorData, setEditorData] = useState(null)
   const [editPostData, setEditPostData] = useState(null)
@@ -23,8 +24,6 @@ const Home = () => {
       })
       .catch(error => console.error('Error getting posts: ', error))
   }
-
-  const handleCreatePost = () => {}
 
   const handleUpsertPost = () => {
     if (editPostData) {
@@ -49,12 +48,18 @@ const Home = () => {
 
   return (
     <>
-      <BlogPostEditor />
+      <BlogPostEditor
+        visible={postEditorVisible}
+        onClose={() => setPostEditorVisible(false)}
+      />
 
       <h1 className='text-center'>(React + Firebase) Blog Demo</h1>
 
       <div className='new-post-button__container'>
-        <button className='new-post-button' onClick={handleCreatePost}>
+        <button
+          className='new-post-button'
+          onClick={() => setPostEditorVisible(true)}
+        >
           Create New Post
         </button>
       </div>
