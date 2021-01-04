@@ -17,9 +17,11 @@ const BlogPostEditor = ({ visible, onClose, onComplete, editPostData }) => {
   const handleSubmit = () => {
     if (editPostData) {
       onComplete({ id: editPostData.id, title: postName, data: editorData })
+      handleClose()
     }
     else if (postName && editorData) {
       onComplete({ title: postName, data: editorData })
+      handleClose()
     }
   }
 

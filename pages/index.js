@@ -25,22 +25,21 @@ const Home = () => {
 
   const handleUpsertPost = blogPost => {
     if (blogPost.id) {
-      // handle updating a post here...
-      console.log(blogPost.id)
-      handleCloseEditor()
+      db.collection('posts').doc(blogPost.id).update(blogPost)
+        .then(() => getPosts())
+        .catch(error => console.error('Error updating post: ', error))
     } else {
-      const data = { title: blogPost.title, data: blogPost.data }
-
-      db.collection('posts').add(data)
-        .then(() => {
-          getPosts()
-          handleCloseEditor()
-        })
+      db.collection('posts').add(blogPost)
+        .then(() => getPosts())
         .catch(error => console.error('Error adding post: ', error))
     }
   }
 
-  const handleDeletePost = data => {}
+  const handleDeletePost = data => {
+    db.collection('posts').doc(data.id).delete()
+      .then(() => getPosts())
+      .catch(error => console.error('Error deleting post: ', error))
+  }
 
   const handleEditPost = data => {
     setEditPostData(data)
