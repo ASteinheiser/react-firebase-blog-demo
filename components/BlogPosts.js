@@ -1,5 +1,5 @@
 const BlogPosts = ({ data }) => {
-  console.log(`Blog post data =>\n${JSON.stringify(data, null, 2)}`)
+  console.log({ data })
 
   return null
 }
